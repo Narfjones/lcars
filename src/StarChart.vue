@@ -68,6 +68,7 @@
     <ForwardScanner v-if="type === 'nav'" />
     <StarCoords v-if="type === 'nav'" />
     <InspectBracket v-if="type === 'planet'" />
+    <SpeedoTach v-if="type === 'speed'" />
   </div>
 </template>
 
@@ -83,6 +84,7 @@ import ForwardScanner from './ForwardScanner.vue'
 import InspectBracket from './InspectBracket.vue'
 import StarCoords from './StarCoords.vue'
 import stars from './star-systems.json'
+import SpeedoTach from './SpeedoTach.vue'
 
 const COLLISION_BUFFER = 10
 
@@ -200,7 +202,7 @@ export default {
       default: 'nav',
       type: String,
       validator: function (value) {
-        return ['nav', 'planet'].indexOf(value) !== -1
+        return ['nav', 'planet', 'speed'].indexOf(value) !== -1
       }
     }
   },
@@ -270,6 +272,7 @@ export default {
     ForwardScanner,
     InspectBracket,
     StarCoords,
+    SpeedoTach
   }
 }
 </script>
