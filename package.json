@@ -8,6 +8,7 @@
     "@snowpack/plugin-vue": "2.6.2",
     "bigint-polyfill": "0.1.0",
     "howler": "2.2.3",
+    "serialport": "10.4.0",
     "vue": "3.2.36"
   },
   "devDependencies": {

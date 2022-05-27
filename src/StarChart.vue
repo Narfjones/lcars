@@ -65,7 +65,6 @@
         <div class="label-text">{{ item.label }}</div>
       </div>
     </div>
-    <ForwardScanner v-if="type === 'nav'" />
     <StarCoords v-if="type === 'nav'" />
     <InspectBracket v-if="type === 'planet'" />
     <SpeedoTach v-if="type === 'speed'" />
@@ -80,7 +79,6 @@ import {
   getRandomInt,
   throttle
 } from './utils'
-import ForwardScanner from './ForwardScanner.vue'
 import InspectBracket from './InspectBracket.vue'
 import StarCoords from './StarCoords.vue'
 import stars from './star-systems.json'
@@ -202,7 +200,7 @@ export default {
       default: 'speed',
       type: String,
       validator: function (value) {
-        return ['nav', 'planet', 'speed'].indexOf(value) !== -1
+        return ['planet', 'speed'].indexOf(value) !== -1
       }
     }
   },
@@ -269,7 +267,6 @@ export default {
     window.removeEventListener('resize', this.throttledCheckLabelCollision)
   },
   components: {
-    ForwardScanner,
     InspectBracket,
     StarCoords,
     SpeedoTach
