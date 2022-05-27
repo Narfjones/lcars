@@ -39,7 +39,7 @@ export default{
       ctx.rotate(rotation);
       ctx.strokeStyle = "#333";
       ctx.fillStyle = "#333";
-      ctx.strokeRect(-20 / 2 + 220, -1 / 2, 20, 1);
+      ctx.strokeRect(-20 / 2 + 220, -1 / 2, 20, 2);
       ctx.restore();
 
       let x = (250 + 180 * Math.cos(rotation));
@@ -65,6 +65,7 @@ export default{
 
     drawSpeedo(speed, gear, rpm, topSpeed, c) {
       var ctx = c.getContext('2d');
+      ctx.globalAlpha = 1;
       c.width = 500;
       c.height = 500;
 
@@ -89,7 +90,7 @@ export default{
       ctx.clearRect(0, 0, 500, 500);
 
       ctx.beginPath();
-      ctx.fillStyle = 'rgba(0, 0, 0, .9)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 1)';
       ctx.arc(250, 250, 240, 0, 2 * Math.PI);
       ctx.fill();
       ctx.save()
@@ -110,10 +111,10 @@ export default{
 
       ctx.font = "700 70px Open Sans";
       ctx.textAlign = "center";
-      ctx.fillText(speed, 250, 220);
+      ctx.fillText(speed, 250, 260);
 
-      ctx.font = "700 15px Open Sans";
-      ctx.fillText("mph", 250, 235);
+      ctx.font = "700 22px Open Sans";
+      ctx.fillText("mph", 250, 280);
 
       if (gear == 0 && speed > 0) {
           ctx.fillStyle = "#999";
@@ -171,7 +172,7 @@ export default{
       ctx.beginPath();
       ctx.strokeStyle = "#41dcf4";
       ctx.lineWidth = 25;
-      ctx.shadowBlur = 20;
+      ctx.shadowBlur = 10;
       ctx.shadowColor = "#00c6ff";
 
       ctx.strokeStyle = speedGradient;
@@ -180,7 +181,7 @@ export default{
       ctx.beginPath();
       ctx.lineWidth = 25;
       ctx.strokeStyle = rpmGradient;
-      ctx.shadowBlur = 20;
+      ctx.shadowBlur = 10;
       ctx.shadowColor = "#f7b733";
 
       ctx.arc(250, 250, 228, .4 * Math.PI, this.calculateRPMAngle(rpm / 4.7, 0, 22.9183) * Math.PI, true, ctx);
@@ -223,7 +224,7 @@ export default{
           rpm += .03; 
         }
 
-      draw(speedM, gear, rpm, 160, c);
+      draw(speedM, gear, rpm, 100, c);
 
       }, 40);
     },
