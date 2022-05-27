@@ -199,7 +199,7 @@ export default {
   name: 'star-chart',
   props: {
     type: {
-      default: 'nav',
+      default: 'speed',
       type: String,
       validator: function (value) {
         return ['nav', 'planet', 'speed'].indexOf(value) !== -1
