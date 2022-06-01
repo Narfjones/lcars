@@ -1,7 +1,7 @@
 import { SerialPort } from 'serialport'
 
-const serialport = new SerialPort({ path: 'COM8', baudRate: 9600 })
-let Readline = SerialPort.parsers.Readline;
+const serialport = new SerialPort( { port:'COM8', baudRate: 9600 } )
+let Readline = SerialPortStream.parsers.Readline;
 let parser = new Readline();
 serialport.pipe(parser);
 
@@ -11,17 +11,21 @@ serialport.on('error', showError); // called when there's an error with the seri
 parser.on('data', readSerialData);  // called when there's new data incoming
 var speedVal;
 var rpmVal;
+var data = [];
 
-export function getSpeed(){
+export default function getSpeed(){
     info_lst = line.split("|");
     speedVal = parseInt(info_lst[0]);
     console.log(speed, rpm)
-    return speedVal, rpmVal
+    data[0]=speedVal
+    return speedVal
 }
 
 export function getRpm(){
     info_lst = line.split("|");
     rpmVal = parseInt(info_lst[1])
     console.log(speed, rpm)
-    return speedVal, rpmVal
+    data[1]=rpmVal
+    return rpmVal
 }
+

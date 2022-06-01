@@ -1,17 +1,20 @@
 {
   "scripts": {
-    "start": "snowpack dev",
+    "start": "snowpack dev --polyfill-node",
     "build": "snowpack build",
     "test": "echo \"Vue 3.0 test support is still in progress.\" && exit 1"
   },
   "dependencies": {
     "@snowpack/plugin-vue": "2.6.2",
+    "axios": "0.27.2",
     "bigint-polyfill": "0.1.0",
+    "buffer": "6.0.3",
     "howler": "2.2.3",
     "serialport": "10.4.0",
+    "snowpack": "3.8.8",
     "vue": "3.2.36"
   },
   "devDependencies": {
-    "snowpack": "3.8.8"
+    "rollup-plugin-node-polyfills": "0.2.1"
   }
 }
