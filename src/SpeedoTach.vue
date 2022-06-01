@@ -3,12 +3,17 @@
 </template>
 
 <script> 
-import getSpeed from './serial/serial.js';
-import getRpm from './serial/serial.js';
+import rpm_ from './data/rpm_sub.vue'
+import speed_ from './data/speed_sub.vue'
+
 
 export default{
   
-  methods: {
+  components: {
+    rpm_, speed_
+  },
+
+  methods: { 
 
     speedNeedle(rotation, ctx) {
       ctx.lineWidth = 2;
@@ -206,8 +211,8 @@ export default{
       let rpm = 0;
       let gear = 0;
       setInterval(function(){
-        speedM = getSpeed();
-        rpm = getRpm();
+        speedM = Rpm;
+        rpm = Speed;
 
       draw(speedM, gear, rpm, 100, c);
 
@@ -220,6 +225,7 @@ export default{
   },
 
   mounted() {
+    this.$mqtt.subscribe('VueMqtt/#')
     var c = document.getElementById("canvasId")
     this.setSpeed(this.drawSpeedo, c)
   },

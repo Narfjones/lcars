@@ -12,7 +12,8 @@
     "howler": "2.2.3",
     "serialport": "10.4.0",
     "snowpack": "3.8.8",
-    "vue": "3.2.36"
+    "vue": "3.2.36",
+    "vue-mqtt": "2.0.3"
   },
   "devDependencies": {
     "rollup-plugin-node-polyfills": "0.2.1"
