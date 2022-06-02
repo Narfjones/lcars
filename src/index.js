@@ -1,8 +1,16 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import mqttVueHook from 'mqtt-vue-hook'
 
 const app = createApp(App)
 app.mount('#app')
+
+app.use(mqttVueHook, `$'mqtt'://'10.0.0.83':'1883`, {
+    clean: false,
+    keepalive: 60,
+    clientId: `mqtt_client_${Math.random().toString(16).substring(2, 10)}`,
+    connectTimeout: 4000,
+})
 
 // Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
 // Learn more: https://www.snowpack.dev/#hot-module-replacement

@@ -1,9 +1,0 @@
-pip install blinker
-pip install cryptography
-pip install Flask
-pip install Flask-Login
-pip install Flask-SQLAlchemy
-pip install PyJWT
-pip install pyodbc
-pip install SQLAlchemy
-pip install Werkzeug

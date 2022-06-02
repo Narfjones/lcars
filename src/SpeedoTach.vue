@@ -3,15 +3,17 @@
 </template>
 
 <script> 
-import rpm_ from './data/rpm_sub.vue'
-import speed_ from './data/speed_sub.vue'
+import mqttVueHook from 'mqtt-vue-hook'
+import { useMQTT } from 'mqtt-vue-hook'
 
+app.use(mqttVueHook, `$'mqtt'://'10.0.0.83':'1883`, {
+    clean: false,
+    keepalive: 60,
+    clientId: `mqtt_client_${Math.random().toString(16).substring(2, 10)}`,
+    connectTimeout: 4000,
+})
 
 export default{
-  
-  components: {
-    rpm_, speed_
-  },
 
   methods: { 
 
@@ -211,8 +213,11 @@ export default{
       let rpm = 0;
       let gear = 0;
       setInterval(function(){
-        speedM = Rpm;
-        rpm = Speed;
+        const mqttHook = useMQTT()
+        mqttHook.subscribe(['esp32/speed', qos])
+        mqttHook.on('message', (topic, message) => {
+          speedM = int(speedM.concat(message))
+        })
 
       draw(speedM, gear, rpm, 100, c);
 
@@ -225,7 +230,6 @@ export default{
   },
 
   mounted() {
-    this.$mqtt.subscribe('VueMqtt/#')
     var c = document.getElementById("canvasId")
     this.setSpeed(this.drawSpeedo, c)
   },
