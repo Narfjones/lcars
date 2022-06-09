@@ -6,12 +6,6 @@
 import mqttVueHook from 'mqtt-vue-hook'
 import { useMQTT } from 'mqtt-vue-hook'
 
-app.use(mqttVueHook, `$'mqtt'://'10.0.0.83':'1883`, {
-    clean: false,
-    keepalive: 60,
-    clientId: `mqtt_client_${Math.random().toString(16).substring(2, 10)}`,
-    connectTimeout: 4000,
-})
 
 export default{
 
@@ -214,11 +208,11 @@ export default{
       let gear = 0;
       setInterval(function(){
         const mqttHook = useMQTT()
-        mqttHook.subscribe(['esp32/speed', qos])
-        mqttHook.on('message', (topic, message) => {
-          speedM = int(speedM.concat(message))
-        })
+        mqttHook.subscribe(['esp32/speed', 0])
+        mqttHook.registerEvent('esp32/speed', function (topic, message) {
+          speedM = int(message.toString())
 
+        })
       draw(speedM, gear, rpm, 100, c);
 
       }, 40);
@@ -244,7 +238,8 @@ export default{
   canvas {
     margin: 0 auto;
     display: block;
-    height: 90%;
-    width: 50%;
+    opacity: 100%;
+    height: 70%;
+    width: 30%;
   }
 </style>
