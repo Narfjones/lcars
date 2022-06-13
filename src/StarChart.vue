@@ -65,8 +65,6 @@
         <div class="label-text">{{ item.label }}</div>
       </div>
     </div>
-    <StarCoords v-if="type === 'nav'" />
-    <InspectBracket v-if="type === 'planet'" />
     <SpeedoTach v-if="type === 'speed'" />
   </div>
 </template>
@@ -200,7 +198,7 @@ export default {
       default: 'speed',
       type: String,
       validator: function (value) {
-        return ['planet', 'speed'].indexOf(value) !== -1
+        return ['speed'].indexOf(value) !== -1
       }
     }
   },
@@ -240,7 +238,6 @@ export default {
   },
   methods: {
     draw() {
-      drawGalacticNoise(this.$refs.noise)
       checkLabelCollision(this.$refs.labels)
     }
   },
