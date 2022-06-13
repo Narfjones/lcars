@@ -3,9 +3,10 @@
 </template>
 
 <script> 
-import mqttVueHook from 'mqtt-vue-hook'
-import { useMQTT } from 'mqtt-vue-hook'
+import * as mqtt from 'mqtt/dist/mqtt';
 
+const client  = mqtt.connect('ws://localhost:8008')
+client.publish('esp/speed', 'Hello mqtt')
 
 export default{
 
@@ -207,12 +208,7 @@ export default{
       let rpm = 0;
       let gear = 0;
       setInterval(function(){
-        const mqttHook = useMQTT()
-        mqttHook.subscribe(['esp32/speed', 0])
-        mqttHook.registerEvent('esp32/speed', function (topic, message) {
-          speedM = int(message.toString())
-
-        })
+        
       draw(speedM, gear, rpm, 100, c);
 
       }, 40);
