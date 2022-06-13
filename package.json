@@ -9,7 +9,7 @@
     "bigint-polyfill": "0.1.0",
     "buffer": "6.0.3",
     "howler": "2.2.3",
-    "mqtt": "4.0.1",
+    "mqtt": "4.3.7",
     "mqtt-vue-hook": "1.2.3",
     "snowpack": "3.8.8",
     "vue": "3.2.36",

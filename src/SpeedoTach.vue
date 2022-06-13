@@ -4,14 +4,26 @@
 
 <script> 
 import * as mqtt from 'mqtt/dist/mqtt';
-
+var msg;
 const client  = mqtt.connect('ws://localhost:8008')
-client.publish('esp/speed', 'Hello mqtt')
+client.on('connect', function () {
+console.log('Connected')
+client.subscribe('esp/speed', function (err) {
+if (!err) {
+  client.publish('test', 'Hello mqtt')
+}
+  })
+})
+client.on('message', function (topic, message, packet) {
+// Payload is Buffer
+msg = message.toString();
+console.log(msg)
+})
 
 export default{
 
   methods: { 
-
+    
     speedNeedle(rotation, ctx) {
       ctx.lineWidth = 2;
 
@@ -208,7 +220,8 @@ export default{
       let rpm = 0;
       let gear = 0;
       setInterval(function(){
-        
+      console.log(msg)
+      let speedM = parseInt(msg);
       draw(speedM, gear, rpm, 100, c);
 
       }, 40);
