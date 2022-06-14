@@ -37,6 +37,7 @@
           height: item.size + 'px'
         }"
       >
+
       </div>
     </div>
     <div class="grid-container">
@@ -233,7 +234,7 @@ export default {
     return {
       numbers,
       backgroundStars,
-      labeledStars
+      // labeledStars
     }
   },
   methods: {

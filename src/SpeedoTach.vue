@@ -248,7 +248,7 @@ export default{
     margin: 0 auto;
     display: block;
     opacity: 100%;
-    height: 70%;
-    width: 30%;
+    height: 480px;
+    width: 480px;
   }
 </style>
