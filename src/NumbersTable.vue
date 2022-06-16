@@ -29,7 +29,7 @@ import { makeRandomLetters, makeRandomNumber, pickRandom, getRandomInt } from '.
 
 // Give it plenty of columns on wide monitors
 const HARDCODED_NUMBER_OF_COLUMNS = 18 * 3
-const HARDCODED_NUMBER_OF_ROWS = 7
+const HARDCODED_NUMBER_OF_ROWS = 4
 
 // The modern Fisher-Yates shuffle algorithm
 // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
@@ -181,7 +181,8 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    line-height: 1.2;
+    white-space: nowrap;
+    line-height: 1.01;
   }
 
   .numbers-row {

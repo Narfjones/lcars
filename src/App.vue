@@ -35,10 +35,6 @@
         <div class="buttons-area">
           <LCARSButton @click="toggleStarChartType" />
           <LCARSButton :blank="true" />
-          <LCARSButton :blank="true" :color="3" />
-          <LCARSButton :blank="true" />
-          <LCARSButton :blank="true" />
-          <LCARSButton :blank="true" />
         </div>
       </div>
       <div class="main-content">
@@ -118,14 +114,8 @@ export default {
     const appendageType = Math.random()
 
     const titles = [
-      // 'Chin\'toka Star System',
-      'Tactical Cartography',
-      'Stellar Cartography',
-      'Long Range Scan',
       'Astrometrics',
-      'Astrometrics Lab',
-      // 'Cerritos Operations',
-      // 'Master Systems Display',
+      'Master Systems Display',
       // 'Communicator Transponder Scan'
     ]
     let title = pickRandom(titles)
@@ -258,7 +248,7 @@ export default {
 
   --lcars-gap: 10px;
   --lcars-sidebar-width: 185px;
-  --lcars-top-section-height: 215px;
+  --lcars-top-section-height: 100px;
   --lcars-title-size: 50px;
   --lcars-sm-title-size: 36px;
   --lcars-xs-title-size: 24px;
@@ -363,8 +353,8 @@ html, body {
       auto
     [main-end];
   grid-template-areas:
-    "sidebar-top title"
     "sidebar-top meta-content"
+    "sidebar-top title"
     "sidebar-top divider"
     "sidebar-bottom divider"
     "sidebar-bottom main-content";
@@ -585,7 +575,6 @@ html, body {
 .buttons-area {
   display: none;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   row-gap: var(--lcars-block-gap);
   column-gap: var(--lcars-gap);
   justify-content: right;

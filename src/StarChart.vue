@@ -29,13 +29,7 @@
       <div
         v-for="(item, index) in backgroundStars"
         :key="index"
-        class="background-star"
-        :style="{
-          left: `calc(${item.left}% - ${item.size}px / 2)`,
-          top: `calc(${item.top}% - ${item.size}px / 2)`,
-          width: item.size + 'px',
-          height: item.size + 'px'
-        }"
+        
       >
 
       </div>

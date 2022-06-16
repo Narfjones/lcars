@@ -1,5 +1,37 @@
 <template>
   <canvas id="canvasId" ref="canvas"></canvas>
+    <!--  the dial  -->
+  <div class="dial-wrapper">
+    <svg class="dial-ui" xmlns="http://www.w3.org/2000/svg" width="466" height="466" viewBox="0 0 466 466">
+      <defs>
+        <filter id="shadow" width="126.9%" height="126.9%" x="-13.4%" y="-13.4%" filterUnits="objectBoundingBox">
+          <feMorphology in="SourceAlpha" operator="dilate" radius="6.5" result="shadowSpreadOuter1" />
+          <feOffset in="shadowSpreadOuter1" result="shadowOffsetOuter1" />
+          <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="10" />
+          <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1" />
+          <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" />
+        </filter>
+      </defs>
+      <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+        <circle cx="232" cy="232" r="232" opacity=".4" stroke="var(--ui-blue)" />
+        <path class="grav-o-meter" stroke="currentColor" stroke-width="10" d="M377.5 375a204 204 0 10-290.3.7" opacity=".8" />
+        <path stroke="#99DFF4" stroke-dasharray="1 14.7" stroke-width="54" d="M377.5 375a204 204 0 10-290.3.7" opacity=".4" />
+        <g fill="#0E0E0E" stroke-width="3" transform="translate(59 59)">
+          <circle filter="url(#shadow)" cx="173" cy="173" r="175" fill="#000" />
+        </g>
+        <g class="dial" fill="#0E0E0E" stroke-width="3" transform="translate(59 59)">
+          <circle cx="173" cy="173" r="175" stroke="var(--ui-blue)" />
+          <circle cx="70" cy="270" r="8" stroke="var(--ui-blue)" />
+        </g>
+      </g>
+    </svg>
+
+    <!--  dial numbers    -->
+    <p class="dial-numbers">
+      <span class="number thicc">9.8</span>
+      <span class="units">M/S/S</span>
+    </p>
+  </div>
 </template>
 
 <script> 
@@ -246,9 +278,43 @@ export default{
   }
   canvas {
     margin: 0 auto;
-    display: block;
+    display: inline;
     opacity: 100%;
-    height: 480px;
-    width: 480px;
+    height: 240px;
+    width: auto;
   }
+  .dial-wrapper {
+  position: relative;
+  width: 466px;
+  height: 466px;
+  z-index: 3;
+  display: grid;
+  place-content: center;
+}
+
+.dial-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.dial-numbers {
+  pointer-events: none;
+  position: relative;
+  text-align: center;
+  line-height: 1;
+}
+
+.number {
+  font-size: 100px;
+}
+
+.units {
+  color: var(--ui-blue);
+  font-weight: 400;
+  display: block;
+  font-size: 25px;
+  letter-spacing: 4px;
+}
+
 </style>
