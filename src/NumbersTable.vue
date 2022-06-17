@@ -181,7 +181,6 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    white-space: nowrap;
     line-height: 1.01;
   }
 
