@@ -60,7 +60,7 @@
         <div class="label-text">{{ item.label }}</div>
       </div>
     </div>
-    <SpeedoTach v-if="type === 'speed'" />
+    <Speedo2 v-if="type === 'speed'" />
   </div>
 </template>
 
@@ -76,6 +76,7 @@ import InspectBracket from './InspectBracket.vue'
 import StarCoords from './StarCoords.vue'
 import stars from './star-systems.json'
 import SpeedoTach from './SpeedoTach.vue'
+import Speedo2 from './Speedo2.vue'
 
 const COLLISION_BUFFER = 10
 
@@ -261,7 +262,8 @@ export default {
   components: {
     InspectBracket,
     StarCoords,
-    SpeedoTach
+    SpeedoTach,
+    Speedo2
   }
 }
 </script>

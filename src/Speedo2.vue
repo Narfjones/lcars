@@ -1,3 +1,4 @@
+<template>
 <div class="inspect-bracket-container">
     <div class="inspect-bracket">
       <!-- This is the original source file, but we build a custom component
@@ -10,15 +11,14 @@
           <div class="iblb-a">
             <div class="iblb-a1" style="height: 40%; top: 25%;" />
             <div class="iblb-scale">
-              <div>010</div>
-              <div>020</div>
-              <div>030</div>
-              <div>040</div>
-              <div>050</div>
-              <div>060</div>
-              <div>070</div>
               <div>080</div>
-              <div>090</div>
+              <div>070</div>
+              <div>060</div>
+              <div>050</div>
+              <div>040</div>
+              <div>030</div>
+              <div>020</div>
+              <div>010</div>
             </div>
           </div>
           <div class="iblb-b">
@@ -30,7 +30,7 @@
       </div>
       
       <div class="inspect-bracket-content">
-        // Speedometer here
+        <canvas id="canvasId" ref="canvas"></canvas>
       </div>
      
       <div class="inspect-bracket-right">
@@ -40,15 +40,15 @@
             <div class="iblb-a1" style="height: 40%; top: 10%;" />
             <div class="iblb-a2" style="height: 25%; top: 15%;" />
             <div class="iblb-scale">
-              <div>010</div>
-              <div>020</div>
-              <div>030</div>
-              <div>040</div>
-              <div>050</div>
-              <div>060</div>
-              <div>070</div>
-              <div>080</div>
               <div>090</div>
+              <div>080</div>
+              <div>070</div>
+              <div>060</div>
+              <div>050</div>
+              <div>040</div>
+              <div>030</div>
+              <div>020</div>
+              <div>010</div>
             </div>
           </div>
           <div class="iblb-b" style="height: 62%;">
@@ -64,6 +64,22 @@
 
 <script>
 import InspectBracketTL from './InspectBracketTL.vue'
+import * as mqtt from 'mqtt/dist/mqtt';
+var msg;
+const client  = mqtt.connect('ws://localhost:8008')
+client.on('connect', function () {
+console.log('Connected')
+client.subscribe('esp/speed', function (err) {
+if (!err) {
+  client.publish('test', 'Hello mqtt')
+}
+  })
+})
+client.on('message', function (topic, message, packet) {
+// Payload is Buffer
+msg = message.toString();
+console.log(msg)
+})
 
 export default {
   props: {
@@ -81,16 +97,68 @@ export default {
   },
   components: {
     InspectBracketTL
+  },
+  methods: {
+
+    drawSpeedo(speed, c) {
+      var ctx = c.getContext('2d');
+      ctx.globalAlpha = 1;
+      c.width = 200;
+      c.height = 200;
+
+      //Rescale the size
+      ctx.scale(1,1);
+
+      ctx.fillStyle = "#FFF";
+      ctx.strokeStyle = "#000";
+
+      ctx.font = "700 150px lcars";
+      ctx.textAlign = "center";
+      ctx.fillText(speed, 100, 110);
+
+      ctx.font = "700 50px lcars";
+      ctx.fillText("mph", 100, 175);
+    },
+
+    setSpeed (draw, c) {
+      let speedM = 20;
+      let rpm = 0;
+      setInterval(function(){
+      //console.log(msg)
+      //let speedM = parseInt(msg);
+      draw(speedM, c);
+
+      }, 40);
+    },
+
+    debug (txt) {
+    console.log(txt)
+    },
+  },
+
+  mounted() {
+    var c = document.getElementById('canvasId')
+    this.setSpeed(this.drawSpeedo, c)
   }
+
 }
 </script>
 
 <style scoped>
+canvas {
+    margin: 0 auto;
+    display: inline;
+    opacity: 100%;
+    height: 200px;
+    width: auto;
+    font-family: 'lcars', sans-serif;
+}
+
 .inspect-bracket-container {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 70%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -107,7 +175,7 @@ export default {
   position: relative;
   z-index: 1;
   width: 80%;
-  height: 80%;
+  height: 90%;
   max-width: 650px;
   max-height: 45vh;
   display: flex;
@@ -316,7 +384,7 @@ svg {
   border: 0 !important;
   color: var(--lcars-color-b6);
   line-height: 1;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
   height: 100%;
   overflow: hidden;
   display: flex;
