@@ -10,9 +10,9 @@
       <div class="lcars-title small">
         <LCARSBar align="left" :color-scheme="titleType">{{title}}</LCARSBar>
       </div>
-      <div class="lcars-title large" :data-type="titleType">
+      <div class="lcars-title large">
+        <span class="short-time">{{time}}</span>
         <span class="short-title">{{title}}</span>
-        <span class="long-title">{{longTitle}}</span>
       </div>
       <div class="sidebar-top">
         <div class="sidebar-block" v-on:click="enterFullscreen">{{displayLcarsLabel ? lcarsLabel : numbers[0]}}</div>
@@ -115,11 +115,13 @@ export default {
 
     const titles = [
       'Astrometrics',
-      'Master Systems Display',
+      //'Master Systems Display',
       // 'Communicator Transponder Scan'
     ]
     let title = pickRandom(titles)
     let appendage = ''
+    var current = new Date();
+    let time = current.toLocaleTimeString();
 
     if (appendageType < 0.33) {
       // type 1: title only
@@ -137,6 +139,7 @@ export default {
 
     return {
       title: title,
+      time: time,
       longTitle: title + appendage,
       titleType: Math.ceil(Math.random() * 2),
       numberSequence: 0,
@@ -366,7 +369,6 @@ html, body {
   font-size: calc(var(--lcars-xs-title-size) * 1.36);
   line-height: 1;
   text-transform: uppercase;
-  text-align: right;
   white-space: nowrap;
   overflow: hidden;
   /* truncating a string with custom string is not supported in any browser except Firefox */
@@ -384,11 +386,20 @@ html, body {
 
 .screen.SM .lcars-title.large,
 .screen.SM .lcars-title.large > .short-title {
-  display: block;
+  display: inline;
 }
 
+.short-title{
+  float:right;
+}
+
+.short-time{
+  display:inline;
+  color: #99ccff;
+  float: left;
+}
 .screen.MD .lcars-title.large > .short-title {
-  display: none;
+  display: inline;
 }
 
 .screen.MD .lcars-title.large > .long-title {

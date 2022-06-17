@@ -1,4 +1,9 @@
 <template>
+
+<div class="inspect-bracket-container">
+<canvas id="canvas2Id" ref="canvas2"></canvas>
+</div>
+
 <div class="inspect-bracket-container">
     <div class="inspect-bracket">
       <!-- This is the original source file, but we build a custom component
@@ -121,7 +126,7 @@ export default {
     },
 
     setSpeed (draw, c) {
-      let speedM = 20;
+      let speedM = 55;
       let rpm = 0;
       setInterval(function(){
       //console.log(msg)
@@ -158,7 +163,7 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 70%;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
