@@ -1,10 +1,6 @@
 <template>
 
 <div class="inspect-bracket-container">
-<canvas id="canvas2Id" ref="canvas2"></canvas>
-</div>
-
-<div class="inspect-bracket-container">
     <div class="inspect-bracket">
       <!-- This is the original source file, but we build a custom component
           so that it can be styled -->
@@ -105,10 +101,10 @@ export default {
   },
   methods: {
 
-    drawSpeedo(speed, c) {
+    drawSpeedo(speed, rpm, c) {
       var ctx = c.getContext('2d');
       ctx.globalAlpha = 1;
-      c.width = 200;
+      c.width = 400;
       c.height = 200;
 
       //Rescale the size
@@ -123,15 +119,28 @@ export default {
 
       ctx.font = "700 50px lcars";
       ctx.fillText("mph", 100, 175);
+
+      ctx.beginPath(); 
+      ctx.moveTo(200,0);
+      ctx.lineTo(200, 200);
+      ctx.stroke();
+
+      ctx.font = "700 100px lcars";
+      ctx.textAlign = "center";
+      ctx.fillText(rpm, 275, 95);
+
+      ctx.font = "700 50px lcars";
+      ctx.textAlign = "center";
+      ctx.fillText("rpm", 275, 175);
     },
 
     setSpeed (draw, c) {
       let speedM = 55;
-      let rpm = 0;
+      let rpm = 2400;
       setInterval(function(){
       //console.log(msg)
       //let speedM = parseInt(msg);
-      draw(speedM, c);
+      draw(speedM, rpm, c);
 
       }, 40);
     },
@@ -142,16 +151,27 @@ export default {
   },
 
   mounted() {
-    var c = document.getElementById('canvasId')
-    this.setSpeed(this.drawSpeedo, c)
+    var c = document.getElementById('canvasId');
+    this.setSpeed(this.drawSpeedo, c);
   }
 
 }
 </script>
 
 <style scoped>
+
 canvas {
     margin: 0 auto;
+    display: inline;
+    opacity: 100%;
+    height: 200px;
+    width: auto;
+    font-family: 'lcars', sans-serif;
+}
+
+.canvas2 {
+    margin: 0 auto;
+    float: right;
     display: inline;
     opacity: 100%;
     height: 200px;
