@@ -104,7 +104,7 @@ export default {
     drawSpeedo(speed, rpm, c) {
       var ctx = c.getContext('2d');
       ctx.globalAlpha = 1;
-      c.width = 400;
+      c.width = 190;
       c.height = 200;
 
       //Rescale the size
@@ -113,25 +113,17 @@ export default {
       ctx.fillStyle = "#FFF";
       ctx.strokeStyle = "#000";
 
-      ctx.font = "700 150px lcars";
+      ctx.font = "500 175px lcars";
       ctx.textAlign = "center";
-      ctx.fillText(speed, 100, 110);
+      ctx.fillText(speed, 100, 150);
 
-      ctx.font = "700 50px lcars";
+      ctx.font = "500 35px lcars";
       ctx.fillText("mph", 100, 175);
 
       ctx.beginPath(); 
       ctx.moveTo(200,0);
       ctx.lineTo(200, 200);
       ctx.stroke();
-
-      ctx.font = "700 100px lcars";
-      ctx.textAlign = "center";
-      ctx.fillText(rpm, 275, 95);
-
-      ctx.font = "700 50px lcars";
-      ctx.textAlign = "center";
-      ctx.fillText("rpm", 275, 175);
     },
 
     setSpeed (draw, c) {
@@ -161,29 +153,20 @@ export default {
 <style scoped>
 
 canvas {
-    margin: 0 auto;
+    margin: auto auto;
     display: inline;
     opacity: 100%;
-    height: 200px;
-    width: auto;
+    height: 100%;
+    width: 100%;
     font-family: 'lcars', sans-serif;
 }
 
-.canvas2 {
-    margin: 0 auto;
-    float: right;
-    display: inline;
-    opacity: 100%;
-    height: 200px;
-    width: auto;
-    font-family: 'lcars', sans-serif;
-}
 
 .inspect-bracket-container {
   position: absolute;
   top: 0;
   left: 0;
-  width: 50%;
+  width: 60%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -192,17 +175,17 @@ canvas {
   --bracket-color: var(--lcars-color-b2);
   /* Even numbers for best results */
   --bracket-size-lg: 64px;
-  --bracket-size-sm: 48px;
-  --bracket-size-xs: 32px;
+  --bracket-size-sm: 64px;
+  --bracket-size-xs: 64px;
 }
 
 .inspect-bracket {
   position: relative;
   z-index: 1;
-  width: 80%;
+  width: 90%;
   height: 90%;
   max-width: 650px;
-  max-height: 45vh;
+  max-height: 55vh;
   display: flex;
 }
 

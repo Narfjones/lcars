@@ -251,9 +251,9 @@ export default {
 
   --lcars-gap: 10px;
   --lcars-sidebar-width: 185px;
-  --lcars-top-section-height: 100px;
-  --lcars-title-size: 50px;
-  --lcars-sm-title-size: 36px;
+  --lcars-top-section-height: 150px;
+  --lcars-title-size: 65px;
+  --lcars-sm-title-size: 44px;
   --lcars-xs-title-size: 24px;
   --lcars-divider-top-height: 16px;
   --lcars-divider-bottom-height: 16px;
