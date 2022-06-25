@@ -620,7 +620,7 @@ html, body {
 
 .screen.SM .main-content {
   display: inline;
-  margin-left: 20px;
+  margin-left: 0px;
   margin-top: 20px;
 }
 
