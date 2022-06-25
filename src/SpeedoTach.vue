@@ -229,7 +229,7 @@ export default{
 
     debug (txt) {
     console.log(txt)
-  }
+    }
   },
 
   mounted() {
@@ -246,10 +246,12 @@ export default{
   }
   canvas {
     margin: 0 auto;
-    display: inline;
+    align-self: right;
+    display: block;
     opacity: 100%;
     height: 240px;
-    width: auto;
+    width: 50%;
+    display: flex;
   }
 
 </style>

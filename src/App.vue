@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="main-content">
-        <StarChart :type="starChartType" />
+            <StarChart :type="starChartType" />
       </div>
       <footer>
         <LCARSBar align="right" :color-scheme="titleType">
@@ -55,6 +55,7 @@ import LCARSButton from './LCARSButton.vue'
 import LCARSBar from './LCARSBar.vue'
 import NumbersTable from './NumbersTable.vue'
 import StarChart from './StarChart.vue'
+import SpeedoTach from './SpeedoTach.vue'
 import { makeRandomLetters, makeRandomNumber, pickRandom } from './utils'
 import { initSounds, sounds } from './sounds'
 
@@ -165,7 +166,8 @@ export default {
     LCARSButton,
     DividerContent,
     NumbersTable,
-    StarChart
+    StarChart,
+    SpeedoTach
   },
   methods: {
     incrementNumberSequence() {
@@ -250,7 +252,7 @@ export default {
   --lcars-color-black: #090909;
 
   --lcars-gap: 10px;
-  --lcars-sidebar-width: 185px;
+  --lcars-sidebar-width: 120px;
   --lcars-top-section-height: 100px;
   --lcars-title-size: 50px;
   --lcars-sm-title-size: 36px;
@@ -615,6 +617,10 @@ html, body {
 
 .main-content {
   grid-area: main-content;
+}
+
+.tach{
+  align-items: right;
 }
 
 .screen.SM .main-content {

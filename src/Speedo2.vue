@@ -61,11 +61,14 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
 import InspectBracketTL from './InspectBracketTL.vue'
+import WarpCore from './warpcore.vue'
 import * as mqtt from 'mqtt/dist/mqtt';
+
 var msg;
 const client  = mqtt.connect('ws://localhost:8008')
 client.on('connect', function () {
@@ -97,15 +100,16 @@ export default {
     }
   },
   components: {
-    InspectBracketTL
+    InspectBracketTL,
+    WarpCore
   },
   methods: {
 
     drawSpeedo(speed, rpm, c) {
       var ctx = c.getContext('2d');
       ctx.globalAlpha = 1;
-      c.width = 400;
-      c.height = 200;
+      c.width = 150;
+      c.height = 150;
 
       //Rescale the size
       ctx.scale(1,1);
@@ -113,25 +117,25 @@ export default {
       ctx.fillStyle = "#FFF";
       ctx.strokeStyle = "#000";
 
-      ctx.font = "700 150px lcars";
+      ctx.font = "700 130px lcars";
       ctx.textAlign = "center";
-      ctx.fillText(speed, 100, 110);
+      ctx.fillText(speed, 76, 110);
 
-      ctx.font = "700 50px lcars";
-      ctx.fillText("mph", 100, 175);
+      ctx.font = "700 35px lcars";
+      ctx.fillText("mph", 76, 140);
 
       ctx.beginPath(); 
       ctx.moveTo(200,0);
       ctx.lineTo(200, 200);
       ctx.stroke();
 
-      ctx.font = "700 100px lcars";
-      ctx.textAlign = "center";
-      ctx.fillText(rpm, 275, 95);
+      //ctx.font = "700 100px lcars";
+      //ctx.textAlign = "center";
+      //ctx.fillText(rpm, 275, 95);
 
-      ctx.font = "700 50px lcars";
-      ctx.textAlign = "center";
-      ctx.fillText("rpm", 275, 175);
+      //ctx.font = "700 50px lcars";
+      //ctx.textAlign = "center";
+      //ctx.fillText("rpm", 275, 175);
     },
 
     setSpeed (draw, c) {
@@ -168,15 +172,22 @@ canvas {
     width: auto;
     font-family: 'lcars', sans-serif;
 }
+.warpcore {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 400px;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.canvas2 {
-    margin: 0 auto;
-    float: right;
-    display: inline;
-    opacity: 100%;
-    height: 200px;
-    width: auto;
-    font-family: 'lcars', sans-serif;
+  --bracket-color: var(--lcars-color-b2);
+  /* Even numbers for best results */
+  --bracket-size-lg: 64px;
+  --bracket-size-sm: 48px;
+  --bracket-size-xs: 32px;
 }
 
 .inspect-bracket-container {
@@ -199,7 +210,7 @@ canvas {
 .inspect-bracket {
   position: relative;
   z-index: 1;
-  width: 80%;
+  width: 50%;
   height: 90%;
   max-width: 650px;
   max-height: 45vh;

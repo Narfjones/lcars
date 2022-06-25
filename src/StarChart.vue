@@ -61,6 +61,7 @@
       </div>
     </div>
     <Speedo2 v-if="type === 'speed'" />
+    <SpeedoTach />
   </div>
 </template>
 
@@ -271,7 +272,7 @@ export default {
 <style scoped>
 .star-chart {
   position: relative;
-  width: 100%;
+  width: 50%%;
   height: 100%;
   overflow: hidden;
 }
