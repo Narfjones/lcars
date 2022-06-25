@@ -1,5 +1,7 @@
 <template>
-  <canvas id="canvasId" ref="canvas"></canvas>
+  <div class="tach-container">
+    <canvas id="canvasId2" ref="canvas2"></canvas>
+  </div>
 </template>
 
 <script> 
@@ -233,25 +235,30 @@ export default{
   },
 
   mounted() {
-    var c = document.getElementById("canvasId")
+    var c = document.getElementById("canvasId2")
     this.setSpeed(this.drawSpeedo, c)
   },
 }
 </script>
 
 <style scoped>
+
   * {
     background: black;
     font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    height: 100%;
   }
-  canvas {
-    margin: 0 auto;
-    align-self: right;
-    display: block;
-    opacity: 100%;
-    height: 240px;
-    width: 50%;
-    display: flex;
+
+  .tach-container {
+  position: absolute;
+  top: 0;
+  left: 52%;
+  width: 45%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   }
 
 </style>

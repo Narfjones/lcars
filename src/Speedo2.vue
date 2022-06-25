@@ -165,36 +165,19 @@ export default {
 <style scoped>
 
 canvas {
-    margin: 0 auto;
+    margin: 0 0;
     display: inline;
     opacity: 100%;
     height: 200px;
     width: auto;
     font-family: 'lcars', sans-serif;
 }
-.warpcore {
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 400px;
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  --bracket-color: var(--lcars-color-b2);
-  /* Even numbers for best results */
-  --bracket-size-lg: 64px;
-  --bracket-size-sm: 48px;
-  --bracket-size-xs: 32px;
-}
 
 .inspect-bracket-container {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 50%;
+  left: -50px;
+  width: 45%;
   height: 100%;
   display: flex;
   align-items: center;

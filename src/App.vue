@@ -55,7 +55,6 @@ import LCARSButton from './LCARSButton.vue'
 import LCARSBar from './LCARSBar.vue'
 import NumbersTable from './NumbersTable.vue'
 import StarChart from './StarChart.vue'
-import SpeedoTach from './SpeedoTach.vue'
 import { makeRandomLetters, makeRandomNumber, pickRandom } from './utils'
 import { initSounds, sounds } from './sounds'
 
@@ -166,8 +165,7 @@ export default {
     LCARSButton,
     DividerContent,
     NumbersTable,
-    StarChart,
-    SpeedoTach
+    StarChart
   },
   methods: {
     incrementNumberSequence() {
@@ -616,14 +614,12 @@ html, body {
 }
 
 .main-content {
+  display: inline;
   grid-area: main-content;
 }
 
-.tach{
-  align-items: right;
-}
-
 .screen.SM .main-content {
+  display: inline;
   margin-left: 20px;
   margin-top: 20px;
 }
