@@ -139,7 +139,7 @@ export default {
     },
 
     setSpeed (draw, c) {
-      let speedM = 55;
+      let speedM = 0;
       let rpm = 2400;
       setInterval(function(){
       //console.log(msg)
