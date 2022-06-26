@@ -378,6 +378,7 @@ html, body {
 .lcars-title.large,
 .lcars-title.large > .long-title {
   display: none;
+  height: 65px;
 }
 
 .screen.SM .lcars-title.small {

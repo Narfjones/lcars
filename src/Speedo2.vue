@@ -117,11 +117,11 @@ export default {
       ctx.fillStyle = "#FFF";
       ctx.strokeStyle = "#000";
 
-      ctx.font = "700 130px lcars";
+      ctx.font = "500 150px lcars";
       ctx.textAlign = "center";
       ctx.fillText(speed, 76, 110);
 
-      ctx.font = "700 35px lcars";
+      ctx.font = "350 35px lcars";
       ctx.fillText("mph", 76, 140);
 
       ctx.beginPath(); 
@@ -143,7 +143,7 @@ export default {
       let rpm = 2400;
       setInterval(function(){
       //console.log(msg)
-      //let speedM = parseInt(msg);
+      let speedM = parseInt(msg);
       draw(speedM, rpm, c);
 
       }, 40);
@@ -168,7 +168,7 @@ canvas {
     margin: 0 0;
     display: inline;
     opacity: 100%;
-    height: 200px;
+    height: 300px;
     width: auto;
     font-family: 'lcars', sans-serif;
 }
@@ -176,7 +176,7 @@ canvas {
 .inspect-bracket-container {
   position: absolute;
   top: 0;
-  left: -50px;
+  left: 0;
   width: 45%;
   height: 100%;
   display: flex;
@@ -193,8 +193,8 @@ canvas {
 .inspect-bracket {
   position: relative;
   z-index: 1;
-  width: 50%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   max-width: 650px;
   max-height: 45vh;
   display: flex;

@@ -102,7 +102,7 @@ export default{
       ctx.arc(250, 250, 240, 0, 2 * Math.PI);
       ctx.stroke();
 
-      ctx.font = "700 130px lcars";
+      ctx.font = "600 190px lcars";
       ctx.textAlign = "center";
       ctx.fillText(rpm, 250, 290);
 
@@ -147,9 +147,8 @@ export default{
     setRpm (draw, c) {
       let rpm = 0;
       setInterval(function(){
-      console.log(msg)
-      // let rpm = parseInt(msg);
-      let rpm = 2300;
+      //console.log(msg)
+      let rpm = parseInt(msg);
       draw(rpm, c);
 
       }, 40);
@@ -178,10 +177,10 @@ export default{
 
   .tach-container {
   position: absolute;
-  top: 0;
-  left: 55%;
-  width: 42%;
-  height: 100%;
+  top: 25px;
+  left: 52%;
+  width: 45%;
+  height: 92%;
   display: flex;
   align-items: center;
   justify-content: center;
