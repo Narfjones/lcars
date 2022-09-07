@@ -188,13 +188,13 @@ export default {
       }
     },
     toggleStarChartType(event) {
-      if (this.starChartType === 'planet') {
+      if (this.starChartType === 'map') {
         this.starChartType = 'speed'
         if (sounds.panelBeep14.playing() === false) {
           sounds.panelBeep14.play()
         }
       } else {
-        this.starChartType = 'planet'
+        this.starChartType = 'map'
         if (sounds.panelBeep14.playing() === false) {
           sounds.panelBeep14.play()
         }

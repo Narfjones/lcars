@@ -195,7 +195,7 @@ export default {
       default: 'speed',
       type: String,
       validator: function (value) {
-        return ['speed'].indexOf(value) !== -1
+        return ['speed', 'map'].indexOf(value) !== -1
       }
     }
   },

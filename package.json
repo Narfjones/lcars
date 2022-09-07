@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "rollup-plugin-node-polyfills": "0.2.1",
-    "vue-svg-loader": "0.16.0"
+    "vue-svg-loader": "0.10.0"
   }
 }
