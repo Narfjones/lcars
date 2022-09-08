@@ -55,6 +55,7 @@ import LCARSButton from './LCARSButton.vue'
 import LCARSBar from './LCARSBar.vue'
 import NumbersTable from './NumbersTable.vue'
 import StarChart from './StarChart.vue'
+import Map1 from "./Map1.vue"
 import { makeRandomLetters, makeRandomNumber, pickRandom } from './utils'
 import { initSounds, sounds } from './sounds'
 
@@ -148,7 +149,7 @@ export default {
         return makeLabels(sidebarLabelType)
       }),
       colorScheme: Math.random() > 0.75 ? 2 : 1,
-      starChartType: 'speed'
+      starChartType: 'map'
     }
   },
   computed: {
@@ -165,7 +166,8 @@ export default {
     LCARSButton,
     DividerContent,
     NumbersTable,
-    StarChart
+    StarChart,
+    Map1
   },
   methods: {
     incrementNumberSequence() {

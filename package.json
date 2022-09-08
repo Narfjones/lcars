@@ -5,6 +5,7 @@
     "test": "echo \"Vue 3.0 test support is still in progress.\" && exit 1"
   },
   "dependencies": {
+    "@fawmi/vue-google-maps": "0.9.79",
     "@snowpack/plugin-vue": "2.6.2",
     "bigint-polyfill": "0.1.0",
     "buffer": "6.0.3",
