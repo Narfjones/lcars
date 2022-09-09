@@ -28,11 +28,12 @@ import InspectBracketTL from './InspectBracketTL.vue'
 import WarpCore from './warpcore.vue'
 import * as mqtt from 'mqtt/dist/mqtt';
 
-var lati;
-var long;
+var lati = 39.917905;
+var long = -77.573876;;
+var coords;
 var regex = /[+-]?\d+(\.\d+)?/g;
 var msg;
-const client  = mqtt.connect('ws://localhost:8008')
+const client  = mqtt.connect('ws://broker.hivemq.com:1883')
 client.on('connect', function () {
 console.log('Connected')
 client.subscribe('esp/gps', function (err) {
@@ -45,6 +46,9 @@ client.on('message', function (topic, message, packet) {
 // Payload is Buffer
 msg = message.toString();
 console.log(msg)
+coords = msg.split(',')
+lati = coords[0].match(regex).map(function(v) { return parseFloat(v); });
+long = coords[1].match(regex).map(function(v) {return parseFloat(v); });
 })
 
 export default {
@@ -52,14 +56,12 @@ export default {
 
   },
   data() {
-    lati = 39.917905;
-    long = -77.573876;
     return {
-      center: { lat:lati, lng:long },
+      center: { lat:this.lati, lng:this.long },
       markers: [{
         id:'dfsldjl3r',
         position:{
-          lat:lati, lng:long
+          lat:this.lati, lng:this.long
         }
       }]
     }
