@@ -23,6 +23,9 @@ import InspectBracketTL from './InspectBracketTL.vue'
 import WarpCore from './warpcore.vue'
 import * as mqtt from 'mqtt/dist/mqtt';
 
+var lati = -34.397;
+var long = 150.644;
+var regex = /[+-]?\d+(\.\d+)?/g;
 var msg;
 const client  = mqtt.connect('ws://localhost:8008')
 client.on('connect', function () {
@@ -40,9 +43,12 @@ console.log(msg)
 })
 
 export default {
+  methods() {
+
+  },
   data() {
     return {
-      center: { lat:51.093048, lng: 6.84212},
+      center: {lat: this.lati, lng: this.long},
       markers: []
     }
   },
