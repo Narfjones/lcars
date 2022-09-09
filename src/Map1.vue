@@ -2,10 +2,15 @@
   <GMapMap
       :center="center"
       ref="myMapRef"
-      :zoom="7"
+      :zoom="18"
       map-type-id="terrain"
       style="width: 1122px; height: 550px"
   >
+  <GMapMarker
+        :key="marker.id"
+        v-for="marker in markers"
+        :position="marker.position"
+    />
       <GMapCluster>
         <GMapMarker
             :key="index"
@@ -23,8 +28,8 @@ import InspectBracketTL from './InspectBracketTL.vue'
 import WarpCore from './warpcore.vue'
 import * as mqtt from 'mqtt/dist/mqtt';
 
-var lati = -34.397;
-var long = 150.644;
+var lati;
+var long;
 var regex = /[+-]?\d+(\.\d+)?/g;
 var msg;
 const client  = mqtt.connect('ws://localhost:8008')
@@ -47,15 +52,37 @@ export default {
 
   },
   data() {
+    lati = 39.917905;
+    long = -77.573876;
     return {
-      center: {lat: this.lati, lng: this.long},
-      markers: []
+      center: { lat:lati, lng:long },
+      markers: [{
+        id:'dfsldjl3r',
+        position:{
+          lat:lati, lng:long
+        }
+      }]
     }
   },
   mounted() {
     this.$refs.myMapRef.$mapPromise.then((mapObject) => {
       console.log('map is loaded now', mapObject);
     });
+    this.$refs.myMapRef.$mapPromise.then((map) => {
+        map.setOptions({
+        styles: [
+          {
+            featureType: 'poi.business',
+            stylers: [{ visibility: 'off' }],
+          },
+          {
+            featureType: 'transit',
+            elementType: 'labels.icon',
+            stylers: [{ visibility: 'off' }],
+          },
+        ]
+      })
+})
   },
 }
 </script>
