@@ -47,8 +47,8 @@ client.on('message', function (topic, message, packet) {
 msg = message.toString();
 console.log(msg)
 coords = msg.split(',')
-lati = coords[0].match(regex).map(function(v) { return parseFloat(v); });
-long = coords[1].match(regex).map(function(v) {return parseFloat(v); });
+// lati = coords[0].match(regex).map(function(v) { return parseFloat(v); });
+// long = coords[1].match(regex).map(function(v) {return parseFloat(v); });
 })
 
 export default {
@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      center: { lat:this.lati, lng:this.long },
+      center: { lat:lati, lng:long },
       markers: [{
         id:'dfsldjl3r',
         position:{
