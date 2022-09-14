@@ -1,9 +1,10 @@
 <template>
   <GMapMap
       :center="center"
+      :id="map"
       ref="myMapRef"
       :zoom="18"
-      map-type-id="terrain"
+      map-type-id="roadmap"
       style="width: 1122px; height: 550px"
   >
   <GMapMarker
@@ -11,14 +12,6 @@
         v-for="marker in markers"
         :position="marker.position"
     />
-      <GMapCluster>
-        <GMapMarker
-            :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
-            @click="center=m.position"
-        />
-      </GMapCluster>
   </GMapMap>
  
 </template>
@@ -33,12 +26,7 @@ var long = -77.573876;;
 var coords;
 var regex = /[+-]?\d+(\.\d+)?/g;
 var msg;
-var options = {
-    host: 'broker.emqx.io',
-    port: 8083,
-    //protocol: 'wss',
-}
-const client  = mqtt.connect(options)
+const client  = mqtt.connect('ws://broker.emqx.io:8083/mqtt')
 client.on('connect', function () {
 console.log('Connected')
 client.subscribe('esp/gps', function (err) {
@@ -52,45 +40,41 @@ client.on('message', function (topic, message, packet) {
 msg = message.toString();
 console.log(msg)
 coords = msg.split(',')
-lati = coords[0].match(regex).map(function(v) { return parseFloat(v); });
-long = coords[1].match(regex).map(function(v) {return parseFloat(v); });
+lati = parseFloat(coords[0].match(regex).map(function(v) { return parseFloat(v); }));
+long = parseFloat(coords[1].match(regex).map(function(v) { return parseFloat(v); }));
 })
 
 export default {
-  methods() {
-
-  },
+  
   data() {
     return {
-      center: { lat:lati, lng:long },
-      markers: [{
-        id:'dfsldjl3r',
-        position:{
-          lat:this.lati, lng:this.long
-        }
-      }]
-    }
+      center: {lat:lati, lng:long},
+      mapOptions: {}
+        };
   },
+
   mounted() {
-    this.$refs.myMapRef.$mapPromise.then((mapObject) => {
+    setInterval(function() {
+      this.$refs.myMapRef.$mapPromise.then((mapObject) => {
       console.log('map is loaded now', mapObject);
-    });
-    this.$refs.myMapRef.$mapPromise.then((map) => {
-        map.setOptions({
-        styles: [
-          {
-            featureType: 'poi.business',
-            stylers: [{ visibility: 'off' }],
-          },
-          {
-            featureType: 'transit',
-            elementType: 'labels.icon',
-            stylers: [{ visibility: 'off' }],
-          },
-        ]
+      });
+      this.$refs.myMapRef.$mapPromise.then((map) => {
+          map.setOptions({
+          styles: [
+           {
+             featureType: 'poi.business',
+              stylers: [{ visibility: 'off' }],
+            },
+            {
+              featureType: 'transit',
+              elementType: 'labels.icon',
+              stylers: [{ visibility: 'off' }],
+            },
+          ]
+        })
       })
-})
-  },
+    }, 1000);
+}
 }
 </script>
 

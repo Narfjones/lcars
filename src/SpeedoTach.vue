@@ -10,9 +10,6 @@ var msg;
 var options = {
     host: 'localhost',
     port: 8008,
-    protocol: 'wss',
-    username: 'narfjones',
-    password: 'Root0401!'
 }
 const client  = mqtt.connect(options)
 client.on('connect', function () {
