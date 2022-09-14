@@ -33,7 +33,12 @@ var long = -77.573876;;
 var coords;
 var regex = /[+-]?\d+(\.\d+)?/g;
 var msg;
-const client  = mqtt.connect('ws://broker.hivemq.com:1883')
+var options = {
+    host: 'broker.emqx.io',
+    port: 8083,
+    //protocol: 'wss',
+}
+const client  = mqtt.connect(options)
 client.on('connect', function () {
 console.log('Connected')
 client.subscribe('esp/gps', function (err) {
@@ -47,8 +52,8 @@ client.on('message', function (topic, message, packet) {
 msg = message.toString();
 console.log(msg)
 coords = msg.split(',')
-// lati = coords[0].match(regex).map(function(v) { return parseFloat(v); });
-// long = coords[1].match(regex).map(function(v) {return parseFloat(v); });
+lati = coords[0].match(regex).map(function(v) { return parseFloat(v); });
+long = coords[1].match(regex).map(function(v) {return parseFloat(v); });
 })
 
 export default {
