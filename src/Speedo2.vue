@@ -70,11 +70,7 @@ import WarpCore from './warpcore.vue'
 import * as mqtt from 'mqtt/dist/mqtt';
 
 var msg;
-var options = {
-    host: 'localhost',
-    port: 8008,
-}
-const client  = mqtt.connect(options)
+const client  = mqtt.connect('ws://broker.emqx.io:8083/mqtt')
 client.on('connect', function () {
 console.log('Connected')
 client.subscribe('esp/speed', function (err) {
