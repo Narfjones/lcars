@@ -9,6 +9,7 @@
   >
   <GMapMarker
         :key="marker.id"
+        :icon= "markerOptions"
         v-for="marker in markers"
         :position="marker.position"
     />
@@ -19,7 +20,8 @@
 <script>
 import InspectBracketTL from './InspectBracketTL.vue'
 import WarpCore from './warpcore.vue'
-import * as mqtt from 'mqtt/dist/mqtt';
+import * as mqtt from 'mqtt/dist/mqtt'
+import mapMarker from './planets/intrepid_marker.png'
 
 var lati = 39.917905;
 var long = -77.573876;;
@@ -55,7 +57,16 @@ export default {
   data() {
     return {
       center: {lat:lati, lng:long},
-      mapOptions: {}
+      mapOptions: {},
+      markers: [
+        {
+          position: {lat: lati, lng: long},
+        }
+      ],
+      markerOptions: {
+        url: mapMarker,
+        scaledSize: { width: 45, height: 90}
+      }
         };
   },
 
