@@ -76,7 +76,7 @@ export default {
           const map = this.$refs.myMapRef;
           setInterval(function(){
             map.panTo(new google.maps.LatLng(lati,long));
-          }, 500)
+          }, 10)
         }
   },
 
