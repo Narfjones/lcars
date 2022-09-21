@@ -60,7 +60,7 @@ export default {
       mapOptions: {},
       markers: [
         {
-          position: {lat: lati, lng: long},
+          position: this.center
         }
       ],
       markerOptions: {
@@ -72,12 +72,6 @@ export default {
 
   methods: {
        
-        follow() {
-          const map = this.$refs.myMapRef;
-          setInterval(function(){
-            map.panTo(new google.maps.LatLng(lati,long));
-          }, 10)
-        }
   },
 
   mounted() {
@@ -101,7 +95,6 @@ export default {
           ]
         })
     });
-    this.follow();
   }
 }
 </script>
