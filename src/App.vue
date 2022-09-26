@@ -468,7 +468,7 @@ html, body {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 34px;
+  width: 8px;
   height: calc(100% - var(--lcars-divider-bottom-height));
   border-top-left-radius: 32px 24px;
 }

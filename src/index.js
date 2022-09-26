@@ -2,12 +2,14 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import VueGoogleMaps from '@fawmi/vue-google-maps'
 
+
 const app = createApp(App)
 app.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyCX4xYGQTq3mdibrEs8-Lnz05FRZ-VsbVY',
   },
 })
+
 app.mount('#app')
 
 // Hot Module Replacement (HMR) - Remove this snippet to remove HMR.

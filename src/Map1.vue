@@ -5,7 +5,7 @@
       ref="myMapRef"
       :zoom="18"
       map-type-id="roadmap"
-      style="width: 1122px; height: 550px"
+      style="width: 1000px; height: 400px"
   >
   <GMapMarker
         :key="marker.id"
@@ -14,14 +14,17 @@
         :position="marker.position"
     />
   </GMapMap>
- 
+
+  <div class="info">
+    <canvas id="canvasId" ref="canvas"></canvas>
+  </div>
+
 </template>
 
 <script>
-import InspectBracketTL from './InspectBracketTL.vue'
-import WarpCore from './warpcore.vue'
 import * as mqtt from 'mqtt/dist/mqtt'
 import mapMarker from './planets/intrepid_marker.png'
+import Speedo2 from './Speedo2.vue';
 
 var lati = 39.917905;
 var long = -77.573876;;
@@ -53,49 +56,95 @@ console.log(long)
 })
 
 export default {
-  
-  data() {
-    return {
-      center: {lat:lati, lng:long},
-      mapOptions: {},
-      markers: [
-        {
-          position: this.center
-        }
-      ],
-      markerOptions: {
-        url: mapMarker,
-        scaledSize: { width: 45, height: 90}
-      }
+    data() {
+        return {
+            center: { lat: lati, lng: long },
+            mapOptions: {},
+            markers: [
+                {
+                    position: this.center
+                }
+            ],
+            markerOptions: {
+                url: mapMarker,
+                scaledSize: { width: 45, height: 90 }
+            }
         };
-  },
+    },
+    methods: {
 
-  methods: {
-       
-  },
+      drawSpeedo(speed, c) {
+        var ctx = c.getContext('2d');
+        ctx.globalAlpha = 1;
+        c.width = 150;
+        c.height = 75;
 
-  mounted() {
+        //Rescale the size
+        ctx.scale(1,1);
 
-    this.$refs.myMapRef.$mapPromise.then((mapObject) => {
-    console.log('map is loaded now', mapObject);
-    });
+        ctx.fillStyle = "#FFF";
+        ctx.strokeStyle = "#000";
 
-    this.$refs.myMapRef.$mapPromise.then((map) => {
-        map.setOptions({
-          styles: [
-            {
-              featureType: 'poi.business',
-              stylers: [{ visibility: 'off' }],
-            },
-            {
-              featureType: 'transit',
-              elementType: 'labels.icon',
-              stylers: [{ visibility: 'off' }],
-            },
-          ]
-        })
-    });
-  }
+        ctx.font = "80 76px lcars";
+        ctx.textAlign = "right";
+        ctx.fillText(speed, 85, 65);
+
+        ctx.font = "150 50px lcars";
+        ctx.textAlign = "left";
+        ctx.fillText("mph", 95, 65);
+
+        ctx.beginPath(); 
+        ctx.moveTo(0,0);
+        ctx.lineTo(0, 0);
+        ctx.stroke();
+        },
+
+      setSpeed (draw, c) {
+        let speedM = 0;
+        setInterval(function(){
+          if (speedM > 120){
+              speedM = 0;
+            }
+          speedM++;
+          draw(speedM, c);
+        }, 100);
+      }
+
+    },
+    mounted() {
+
+        this.$refs.myMapRef.$mapPromise.then((mapObject) => {
+            console.log("map is loaded now", mapObject);
+        });
+
+        this.$refs.myMapRef.$mapPromise.then((map) => {
+            map.setOptions({
+                styles: [
+                    {
+                        featureType: "poi.business",
+                        stylers: [{ visibility: "off" }],
+                    },
+                    {
+                        featureType: "transit",
+                        elementType: "labels.icon",
+                        stylers: [{ visibility: "off" }],
+                    },
+                ]
+            });
+        });
+
+      var c = document.getElementById('canvasId');
+      this.setSpeed(this.drawSpeedo, c);
+
+    },
+
+    components: { Speedo2 }
 }
 </script>
 
+<style>
+.info{
+  height: 70px;
+  width: 800px;
+}
+</style>
